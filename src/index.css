@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-.test-all {
-  @apply min-h-screen flex items-center justify-center bg-amber-200 text-blue-700;
+@layer base {
+  body {
+    @apply bg-background text-neutral font-sans;
+  }
+
+  /* Przycisk główny */
+  .btn {
+    @apply bg-primary text-white px-4 py-2 rounded-md font-medium;
+  }
+  .btn:hover {
+    @apply bg-secondary;
+  }
+
+  /* Przycisk akcentowy */
+  .btn-accent {
+    @apply bg-accent text-white px-4 py-2 rounded-md font-medium;
+  }
+  .btn-accent:hover {
+    @apply opacity-90;
+  }
 }

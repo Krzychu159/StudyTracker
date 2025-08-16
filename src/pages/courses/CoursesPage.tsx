@@ -16,17 +16,19 @@ export default function CoursesPage() {
   }, []);
 
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">Courses:</h1>
+    <div className="p-4 w-full max-w-[500px]">
+      <h1 className="text-red font-bold mb-4">Courses:</h1>
       <ul className="space-y-2">
         {courses.map((course) => (
           <li key={course.id} className="p-2 border rounded bg-white shadow">
+            {" "}
             <Link to={`/courses/${course.id}`}>
               <div className="font-semibold">{course.title}</div>
+
+              <div className="text-sm text-gray-500">
+                {course.progress}% ukończone
+              </div>
             </Link>
-            <div className="text-sm text-gray-500">
-              {course.progress}% ukończone
-            </div>
           </li>
         ))}
       </ul>

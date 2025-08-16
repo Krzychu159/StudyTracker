@@ -10,3 +10,9 @@ export async function getLessons() {
 
   return data || [];
 }
+export async function getLessonsByCourseId(id: number) {
+  return await supabase.from("lessons").select("*").eq("course_id", id);
+}
+export async function getLessonsByLessonId(id: number) {
+  return await supabase.from("lessons").select("*").eq("id", id).single();
+}
