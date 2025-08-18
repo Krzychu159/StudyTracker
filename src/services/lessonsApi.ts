@@ -16,3 +16,34 @@ export async function getLessonsByCourseId(id: number) {
 export async function getLessonsByLessonId(id: number) {
   return await supabase.from("lessons").select("*").eq("id", id).single();
 }
+
+export async function changeLessonDone(id: number) {
+  const { data, error } = await supabase
+    .from("lessons")
+    .select("done")
+    .eq("id", id)
+    .single();
+
+  if (error) throw error;
+  if (!data) throw new Error("Lesson not found");
+
+  const { data: update, error: updateError } = await supabase
+    .from("lessons")
+    .update({ done: !data.done })
+    .eq("id", id);
+
+  if (updateError) {
+    throw updateError;
+  }
+  return update;
+}
+
+export async function deleteLesson(id: number) {
+  const { error } = await supabase.from("lessons").delete().eq("id", id);
+
+  if (error) {
+    console.error("Error deleting lesson:", error.message);
+    throw error;
+  }
+  return true;
+}

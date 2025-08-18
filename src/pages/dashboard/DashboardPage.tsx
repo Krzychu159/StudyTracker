@@ -19,12 +19,17 @@ type Lessons = {
 export default function Dashboardpage() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [lessons, setLessons] = useState<Lessons[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     getCourses().then(setCourses);
+    setLoading(false);
   }, []);
   useEffect(() => {
+    setLoading(true);
     getLessons().then(setLessons);
+    setLoading(false);
   }, []);
 
   return (
@@ -32,6 +37,7 @@ export default function Dashboardpage() {
       <div>
         <ul className="space-y-2">
           <p>Lastest courses</p>
+          {loading ? <div className="text-center">Loading...</div> : null}
           {courses.slice(0, 8).map((course) => (
             <li key={course.id} className="p-2 border rounded bg-white shadow">
               <Link to={`/courses/${course.id}`}>

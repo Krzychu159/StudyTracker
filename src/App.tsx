@@ -4,10 +4,13 @@ import LessonsPage from "./pages/lessons/LessonsPage";
 import CourseDetailsPage from "./pages/courses/CourseDetailsPage";
 import Dashboardpage from "./pages/dashboard/DashboardPage";
 import LessonDetailsPage from "./pages/lessons/LessonDetailsPage";
+import { Toaster } from "react-hot-toast";
+import "./App.css";
 
 export default function App() {
   return (
     <div className="p-4 space-y-4 flex flex-col items-center">
+      <Toaster />
       <nav className="flex gap-4">
         <Link to="/">Home</Link>
         <Link to="/courses">Courses</Link>

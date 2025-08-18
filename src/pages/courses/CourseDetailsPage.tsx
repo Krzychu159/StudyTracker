@@ -1,7 +1,8 @@
-import { getCourseById } from "../../services/coursesApi";
-import { useParams } from "react-router-dom";
+import { deleteCourse, getCourseById } from "../../services/coursesApi";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getLessonsByCourseId } from "../../services/lessonsApi";
+import toast from "react-hot-toast";
 
 type Course = {
   id: number;
@@ -21,6 +22,7 @@ export default function CoursesPage() {
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState(true);
   const [lessons, setLessons] = useState<Lessons[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!id) return;
@@ -54,9 +56,22 @@ export default function CoursesPage() {
     fetchLessons();
   }, [id]);
 
+  async function handleDelete() {
+    if (!course) return;
+    if (window.confirm("Are you sure you want to delete this course?")) {
+      try {
+        await deleteCourse(course.id);
+        navigate(`/courses`);
+        toast.success("Lesson deleted successfully");
+      } catch (error) {
+        console.error("Error deleting lesson:", error);
+      }
+    }
+  }
+
   return (
     <>
-      <div className="p-4">
+      <div className="p-4 w-full max-w-[500px]">
         <h1 className="text-xl font-bold mb-4">Course:</h1>
         {loading ? (
           <div>Loading...</div>
@@ -73,7 +88,7 @@ export default function CoursesPage() {
         {loading ? (
           <div>Loading lessons...</div>
         ) : (
-          <ul className="space-y-2">
+          <ul className="space-y-2 ">
             {lessons.map((lesson) => (
               <li
                 key={lesson.id}
@@ -89,15 +104,20 @@ export default function CoursesPage() {
                   )}
                 </div>
                 <div>
-                  <button className="btn">
-                    {" "}
-                    {lesson.done ? "Unmark as done" : "Mark as done"}
-                  </button>
+                  <Link to={`/lessons/${lesson.id}`} className="btn">
+                    View Lesson
+                  </Link>
                 </div>
               </li>
             ))}
           </ul>
         )}
+        <div className="p-4 flex justify-around">
+          <button className="btn" onClick={() => handleDelete()}>
+            Delete Course
+          </button>
+          <button className="btn">Update Course</button>
+        </div>
       </div>
     </>
   );

@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { getLessonsByLessonId } from "../../services/lessonsApi";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import {
+  getLessonsByLessonId,
+  changeLessonDone,
+  deleteLesson,
+} from "../../services/lessonsApi";
 import { getCourseById } from "../../services/coursesApi";
+import toast from "react-hot-toast";
 
 type Lessons = {
   id: number;
@@ -21,6 +26,8 @@ export default function LessonDetailsPage() {
   const [lesson, setLesson] = useState<Lessons | null>(null);
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState(true);
+  const [done, setDone] = useState<boolean | null>(null);
+  const navigate = useNavigate();
 
   // Fetch lesson
   useEffect(() => {
@@ -29,6 +36,7 @@ export default function LessonDetailsPage() {
     async function fetchLesson() {
       setLoading(true);
       const { data, error } = await getLessonsByLessonId(Number(id));
+      setDone(data.done);
       if (error) {
         console.error("Error fetching lesson:", error.message);
       } else {
@@ -59,13 +67,44 @@ export default function LessonDetailsPage() {
     fetchCourse();
   }, [lesson]);
 
+  async function handleToggle() {
+    if (!lesson) return;
+    const newDone = !done;
+    setDone(newDone);
+
+    try {
+      await changeLessonDone(lesson.id);
+    } catch (error) {
+      console.error("Error changing lesson done status:", error);
+      setDone(!newDone); // Revert the change if there was an error
+    }
+  }
+
+  async function handleDelete() {
+    if (!lesson) return;
+    if (window.confirm("Are you sure you want to delete this lesson?")) {
+      try {
+        await deleteLesson(lesson.id);
+        navigate(`/courses/${lesson.course_id}`);
+        toast.success("Lesson deleted successfully");
+      } catch (error) {
+        console.error("Error deleting lesson:", error);
+      }
+    }
+  }
+
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div>
-      <div className="p-4">{lesson?.title}</div>
+    <div className="p-4 w-full max-w-[400px]">
+      <div className="p-4 ">{lesson?.title}</div>
       <div className="p-4">
-        {lesson?.done ? <div>done</div> : <div>not done</div>}
+        <div>
+          <div>{done ? "Done" : "Not done"}</div>{" "}
+          <button className="btn" onClick={handleToggle}>
+            {done ? "Mark as not done" : "Mark as done"}
+          </button>
+        </div>
       </div>
       <Link to={`/courses/${lesson?.course_id}`}>
         {" "}
@@ -73,6 +112,12 @@ export default function LessonDetailsPage() {
           This lesson is from course: {course?.title}
         </div>
       </Link>
+      <div className="p-4 flex justify-around">
+        <button className="btn" onClick={() => handleDelete()}>
+          Delete Course
+        </button>
+        <button className="btn">Update Course</button>
+      </div>
     </div>
   );
 }

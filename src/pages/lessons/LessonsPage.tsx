@@ -24,9 +24,12 @@ export default function LessonsPage() {
             {" "}
             <Link to={`/lessons/${lesson.id}`}>
               <div className="font-semibold">{lesson.title}</div>
-              <div className="text-sm text-gray-500">
-                {lesson.done ? "Completed" : "Not completed"}
-              </div>
+
+              {lesson.done ? (
+                <div className="text-sm text-accent">Completed</div>
+              ) : (
+                <div className="text-sm text-secondary">Not completed</div>
+              )}
             </Link>
           </li>
         ))}
