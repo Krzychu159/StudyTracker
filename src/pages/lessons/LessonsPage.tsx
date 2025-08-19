@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getLessons } from "../../services/lessonsApi";
-import { Link } from "react-router-dom";
+import LessonList from "../../components/lessons/LessonList";
+import LessonHeader from "../../components/lessons/LessonHeader";
 
 type Lessons = {
   id: number;
@@ -17,23 +18,8 @@ export default function LessonsPage() {
 
   return (
     <div className="p-4 w-full max-w-[500px]">
-      <h1 className="text-xl font-bold mb-4">Lessons:</h1>
-      <ul className="space-y-2">
-        {lessons.map((lesson) => (
-          <li key={lesson.id} className=" p-2 border rounded  bg-white shadow">
-            {" "}
-            <Link to={`/lessons/${lesson.id}`}>
-              <div className="font-semibold">{lesson.title}</div>
-
-              {lesson.done ? (
-                <div className="text-sm text-accent">Completed</div>
-              ) : (
-                <div className="text-sm text-secondary">Not completed</div>
-              )}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <LessonHeader />
+      <LessonList lessons={lessons} />
     </div>
   );
 }

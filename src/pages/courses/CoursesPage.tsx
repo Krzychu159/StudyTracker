@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCourses } from "../../services/coursesApi";
-import { Link } from "react-router-dom";
+import CoursesHeader from "../../components/courses/CourseHeader";
+import CourseList from "../../components/courses/CourseList";
 
 type Course = {
   id: number;
@@ -17,21 +18,8 @@ export default function CoursesPage() {
 
   return (
     <div className="p-4 w-full max-w-[500px]">
-      <h1 className="text-red font-bold mb-4">Courses:</h1>
-      <ul className="space-y-2">
-        {courses.map((course) => (
-          <li key={course.id} className="p-2 border rounded bg-white shadow">
-            {" "}
-            <Link to={`/courses/${course.id}`}>
-              <div className="font-semibold">{course.title}</div>
-
-              <div className="text-sm text-gray-500">
-                {course.progress}% ukończone
-              </div>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <CoursesHeader />
+      <CourseList courses={courses} />
     </div>
   );
 }

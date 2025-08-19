@@ -1,7 +1,8 @@
 import { getCourses } from "../../services/coursesApi";
-import { Link } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 import { getLessons } from "../../services/lessonsApi";
+import DashboardLatest from "../../components/dashboard/DashboardLatest";
 
 type Course = {
   id: number;
@@ -34,37 +35,7 @@ export default function Dashboardpage() {
 
   return (
     <div className="p-4 flex justify-center gap-8 w-full max-w-[500px]">
-      <div>
-        <ul className="space-y-2">
-          <p>Lastest courses</p>
-          {loading ? <div className="text-center">Loading...</div> : null}
-          {courses.slice(0, 8).map((course) => (
-            <li key={course.id} className="p-2 border rounded bg-white shadow">
-              <Link to={`/courses/${course.id}`}>
-                <div className="font-semibold">{course.title}</div>
-              </Link>
-              <div className="text-sm text-gray-500">
-                {course.progress}% ukończone
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <ul className="space-y-2">
-          <p>Latest lessons</p>
-          {lessons.slice(0, 8).map((lesson) => (
-            <li key={lesson.id} className="p-2 border rounded bg-white shadow">
-              <Link to={`/lessons/${lesson.id}`}>
-                <div className="font-semibold">{lesson.title}</div>
-              </Link>
-              <div className="text-sm text-gray-500">
-                {lesson.done}% ukończone
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <DashboardLatest courses={courses} lessons={lessons} loading={loading} />
     </div>
   );
 }
