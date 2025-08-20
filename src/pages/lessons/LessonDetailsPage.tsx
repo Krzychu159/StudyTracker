@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   getLessonsByLessonId,
   changeLessonDone,
@@ -7,6 +7,8 @@ import {
 } from "../../services/lessonsApi";
 import { getCourseById } from "../../services/coursesApi";
 import toast from "react-hot-toast";
+import LessonDetailsData from "../../components/lessons/LessonDetailsData";
+import LessonButtons from "../../components/lessons/LessonButtons";
 
 type Lessons = {
   id: number;
@@ -96,28 +98,14 @@ export default function LessonDetailsPage() {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className="p-4 w-full max-w-[400px]">
-      <div className="p-4 ">{lesson?.title}</div>
-      <div className="p-4">
-        <div>
-          <div>{done ? "Done" : "Not done"}</div>{" "}
-          <button className="btn" onClick={handleToggle}>
-            {done ? "Mark as not done" : "Mark as done"}
-          </button>
-        </div>
-      </div>
-      <Link to={`/courses/${lesson?.course_id}`}>
-        {" "}
-        <div className="p-4 text-secondary">
-          This lesson is from course: {course?.title}
-        </div>
-      </Link>
-      <div className="p-4 flex justify-around">
-        <button className="btn" onClick={() => handleDelete()}>
-          Delete Course
-        </button>
-        <button className="btn">Update Course</button>
-      </div>
-    </div>
+    <>
+      <LessonDetailsData
+        lesson={lesson}
+        course={course}
+        handleToggle={handleToggle}
+        done={done}
+      />
+      <LessonButtons handleDelete={handleDelete} />
+    </>
   );
 }

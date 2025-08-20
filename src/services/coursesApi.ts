@@ -24,3 +24,14 @@ export async function deleteCourse(id: number) {
   }
   return true;
 }
+
+export async function addCourse(title: string, description: string) {
+  const { data, error } = await supabase
+    .from("courses")
+    .insert([{ title, description }]);
+  if (error) {
+    console.error("error added courses:", error.message);
+    throw error;
+  }
+  return data || [];
+}

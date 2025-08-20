@@ -1,8 +1,11 @@
 import { deleteCourse, getCourseById } from "../../services/coursesApi";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getLessonsByCourseId } from "../../services/lessonsApi";
 import toast from "react-hot-toast";
+import CourseButton from "../../components/courses/CourseButtons";
+import CourseDetailsData from "../../components/courses/CourseDetailsData";
+import CourseDetailsLessonsList from "../../components/courses/CourseDetailsLessonsList";
 
 type Course = {
   id: number;
@@ -69,55 +72,16 @@ export default function CoursesPage() {
     }
   }
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className="p-4 w-full max-w-[500px]">
-        <h1 className="text-xl font-bold mb-4">Course:</h1>
-        {loading ? (
-          <div>Loading...</div>
-        ) : (
-          <div>
-            <div>{course?.title}</div>
-            <div>{course?.description}</div>
-            <div>{course?.progress}%</div>
-          </div>
-        )}
-      </div>
-      <div className="p-4">
-        <h2 className="text-lg font-semibold mb-2">Lessons in this course:</h2>
-        {loading ? (
-          <div>Loading lessons...</div>
-        ) : (
-          <ul className="space-y-2 ">
-            {lessons.map((lesson) => (
-              <li
-                key={lesson.id}
-                className="p-2 border rounded bg-white shadow flex flex-row justify-between items-center max-w-md"
-              >
-                <div>
-                  {" "}
-                  <div className="font-semibold">{lesson.title}</div>
-                  {lesson.done ? (
-                    <div className="text-sm text-accent">Completed</div>
-                  ) : (
-                    <div className="text-sm text-secondary">Not completed</div>
-                  )}
-                </div>
-                <div>
-                  <Link to={`/lessons/${lesson.id}`} className="btn">
-                    View Lesson
-                  </Link>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-        <div className="p-4 flex justify-around">
-          <button className="btn" onClick={() => handleDelete()}>
-            Delete Course
-          </button>
-          <button className="btn">Update Course</button>
-        </div>
+        <CourseDetailsData course={course} />
+        <CourseDetailsLessonsList lessons={lessons} />
+        <CourseButton handleDelete={handleDelete} />
       </div>
     </>
   );
