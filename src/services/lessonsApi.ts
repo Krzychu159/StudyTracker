@@ -47,3 +47,14 @@ export async function deleteLesson(id: number) {
   }
   return true;
 }
+
+export async function addLesson(title: string, courseId: number) {
+  const { data, error } = await supabase
+    .from("lessons")
+    .insert([{ title, course_id: courseId }]);
+  if (error) {
+    console.error("error added lesson:", error.message);
+    throw error;
+  }
+  return data || [];
+}

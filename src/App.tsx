@@ -5,6 +5,7 @@ import CourseDetailsPage from "./pages/courses/CourseDetailsPage";
 import Dashboardpage from "./pages/dashboard/DashboardPage";
 import LessonDetailsPage from "./pages/lessons/LessonDetailsPage";
 import CoursesAddPage from "./pages/courses/CourseAddPage";
+import LessonAddPage from "./pages/lessons/LessonAddPage";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
 
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/courses" element={<CoursesPage />} />
         <Route path="/courses/add" element={<CoursesAddPage />} />
         <Route path="/lessons" element={<LessonsPage />} />
+        <Route path="/lessons/add" element={<LessonAddPage />} />
         <Route path="/courses/:id" element={<CourseDetailsPage />} />
         <Route path="/lessons/:id" element={<LessonDetailsPage />} />
       </Routes>
