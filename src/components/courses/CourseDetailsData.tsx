@@ -10,7 +10,7 @@ type CourseDetailsDataProps = {
 };
 
 export default function CourseDetailsData({ course }: CourseDetailsDataProps) {
-  if (!course) return <p>Brak danych kursu.</p>;
+  if (!course) return <p>No data of course</p>;
 
   return (
     <>

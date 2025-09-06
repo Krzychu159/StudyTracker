@@ -2,6 +2,7 @@ import { getCourses } from "../../services/coursesApi";
 import { addLesson } from "../../services/lessonsApi";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 type Course = {
   id: number;
@@ -13,6 +14,7 @@ export default function LessonAddForm() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [title, setTitle] = useState("");
   const [courseId, setCourseId] = useState<number>(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getCourses().then(setCourses);
@@ -28,6 +30,7 @@ export default function LessonAddForm() {
         setTitle("");
         setCourseId(0);
         toast.success("lesson added successfully");
+        navigate("/lessons");
       })
       .catch((error) => {
         console.error("Error adding lesson:", error);

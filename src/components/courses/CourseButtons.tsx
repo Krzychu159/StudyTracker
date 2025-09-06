@@ -1,14 +1,25 @@
-export default function CourseButton({
-  handleDelete,
-}: {
+import { Link } from "react-router-dom";
+
+type CourseButtonsProps = {
   handleDelete: () => void;
-}) {
+  courseId: number;
+};
+
+export default function CourseButtons({
+  courseId,
+  handleDelete,
+}: CourseButtonsProps) {
   return (
     <div className="p-4 flex justify-around">
-      <button className="btn" onClick={() => handleDelete()}>
+      <button className="btn" onClick={handleDelete}>
         Delete Course
       </button>
-      <button className="btn">Update Course</button>
+      <Link to={`/courses/edit/${courseId}`}>
+        <button className="btn">Edit Course</button>
+      </Link>
+      <Link to="/courses">
+        <button className="btn">Back to Courses</button>
+      </Link>
     </div>
   );
 }

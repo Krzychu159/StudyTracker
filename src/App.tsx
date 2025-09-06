@@ -6,8 +6,10 @@ import Dashboardpage from "./pages/dashboard/DashboardPage";
 import LessonDetailsPage from "./pages/lessons/LessonDetailsPage";
 import CoursesAddPage from "./pages/courses/CourseAddPage";
 import LessonAddPage from "./pages/lessons/LessonAddPage";
+import CoursesEditPage from "./pages/courses/CourseEditPage";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
+import LessonEditPage from "./pages/lessons/LessonEditPage";
 
 export default function App() {
   return (
@@ -23,8 +25,10 @@ export default function App() {
         <Route path="/" element={<Dashboardpage />} />
         <Route path="/courses" element={<CoursesPage />} />
         <Route path="/courses/add" element={<CoursesAddPage />} />
+        <Route path="/courses/edit/:id" element={<CoursesEditPage />} />
         <Route path="/lessons" element={<LessonsPage />} />
         <Route path="/lessons/add" element={<LessonAddPage />} />
+        <Route path="/lessons/edit/:id" element={<LessonEditPage />} />
         <Route path="/courses/:id" element={<CourseDetailsPage />} />
         <Route path="/lessons/:id" element={<LessonDetailsPage />} />
       </Routes>

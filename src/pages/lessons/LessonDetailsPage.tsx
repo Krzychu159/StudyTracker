@@ -98,14 +98,14 @@ export default function LessonDetailsPage() {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <>
+    <div className="p-4 w-full max-w-[500px]">
       <LessonDetailsData
         lesson={lesson}
         course={course}
         handleToggle={handleToggle}
         done={done}
       />
-      <LessonButtons handleDelete={handleDelete} />
-    </>
+      <LessonButtons handleDelete={handleDelete} lessonId={lesson?.id ?? 0} />
+    </div>
   );
 }

@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getLessonsByCourseId } from "../../services/lessonsApi";
 import toast from "react-hot-toast";
-import CourseButton from "../../components/courses/CourseButtons";
+import CourseButtons from "../../components/courses/CourseButtons";
 import CourseDetailsData from "../../components/courses/CourseDetailsData";
 import CourseDetailsLessonsList from "../../components/courses/CourseDetailsLessonsList";
 
@@ -81,7 +81,7 @@ export default function CoursesPage() {
       <div className="p-4 w-full max-w-[500px]">
         <CourseDetailsData course={course} />
         <CourseDetailsLessonsList lessons={lessons} />
-        <CourseButton handleDelete={handleDelete} />
+        <CourseButtons handleDelete={handleDelete} courseId={course?.id ?? 0} />
       </div>
     </>
   );

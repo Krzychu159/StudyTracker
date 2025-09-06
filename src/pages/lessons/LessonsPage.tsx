@@ -19,7 +19,7 @@ export default function LessonsPage() {
   return (
     <div className="p-4 w-full max-w-[500px]">
       <LessonHeader />
-      <LessonList lessons={lessons} />
+      <LessonList lessons={lessons} slices={10} />
     </div>
   );
 }

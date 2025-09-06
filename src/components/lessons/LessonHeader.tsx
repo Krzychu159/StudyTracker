@@ -1,5 +1,6 @@
 import { getCourses } from "../../services/coursesApi";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 type Course = {
   id: number;
@@ -19,24 +20,29 @@ export default function CoursesHeader() {
       <h1 className="text-red font-bold mb-4">Lessons:</h1>
 
       <div>
-        <button className="btn">Add new lesson</button>
-        <select
-          name="courses"
-          id="courses"
-          onChange={(e) => setCourseId(Number(e.target.value))}
-          value={courseId}
-        >
-          <option value="0">None</option>
-          {courses.map((course) => (
-            <option key={course.id} value={course.id}>
-              {course.title}
-            </option>
-          ))}
-        </select>
-        <select name="done" id="done">
-          <option value="done">Completed</option>
-          <option value="not done">Not Coompleted</option>
-        </select>
+        <Link to="/lessons/add">
+          <button className="btn">Add new lesson</button>
+        </Link>
+        <div className="flex gap-5 py-3">
+          <select
+            name="courses"
+            id="courses"
+            onChange={(e) => setCourseId(Number(e.target.value))}
+            value={courseId}
+          >
+            <option value="0">Course name</option>
+            {courses.map((course) => (
+              <option key={course.id} value={course.id}>
+                {course.title}
+              </option>
+            ))}
+          </select>
+          <select name="done" id="done">
+            <option value="null">Is completed?</option>
+            <option value="done">Completed</option>
+            <option value="not done">Not Coompleted</option>
+          </select>
+        </div>
       </div>
     </>
   );
