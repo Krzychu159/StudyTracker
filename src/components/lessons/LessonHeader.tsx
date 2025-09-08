@@ -42,6 +42,7 @@ export default function CoursesHeader() {
             <option value="done">Completed</option>
             <option value="not done">Not Coompleted</option>
           </select>
+          <input type="text" />
         </div>
       </div>
     </>

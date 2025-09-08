@@ -20,7 +20,7 @@ export default function LessonButtons({
       </Link>
 
       <Link to="/lessons">
-        <button className="btn">Back to Courses</button>
+        <button className="btn">Back to Lessons</button>
       </Link>
     </div>
   );
