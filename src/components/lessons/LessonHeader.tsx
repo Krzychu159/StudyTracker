@@ -1,50 +1,64 @@
-import { getCourses } from "../../services/coursesApi";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import type { Done } from "../../hooks/useUrlFilters";
 
-type Course = {
-  id: number;
-  title: string;
-  progress: number;
+type Course = { id: number; title: string };
+
+type Props = {
+  q: string;
+  done: Done;
+  courseId: number | null;
+  courses: Course[];
+  onQueryChange: (q: string) => void;
+  onDoneChange: (d: Done) => void;
+  onCourseChange: (id: number | null) => void;
 };
-export default function CoursesHeader() {
-  const [courses, setCourses] = useState<Course[]>([]);
-  const [courseId, setCourseId] = useState<number>(0);
 
-  useEffect(() => {
-    getCourses().then(setCourses);
-  }, []);
-
+export default function LessonHeader({
+  q,
+  done,
+  courseId,
+  courses,
+  onQueryChange,
+  onDoneChange,
+  onCourseChange,
+}: Props) {
   return (
-    <>
-      <h1 className="text-red font-bold mb-4">Lessons:</h1>
+    <div className="flex flex-wrap gap-2 items-center">
+      <input
+        value={q}
+        onChange={(e) => onQueryChange(e.target.value)}
+        placeholder="Search lessons…"
+        className="border rounded px-3 py-2 flex-1 min-w-[220px]"
+      />
 
-      <div>
-        <Link to="/lessons/add">
-          <button className="btn">Add new lesson</button>
-        </Link>
-        <div className="flex gap-5 py-3">
-          <select
-            name="courses"
-            id="courses"
-            onChange={(e) => setCourseId(Number(e.target.value))}
-            value={courseId}
-          >
-            <option value="0">Course name</option>
-            {courses.map((course) => (
-              <option key={course.id} value={course.id}>
-                {course.title}
-              </option>
-            ))}
-          </select>
-          <select name="done" id="done">
-            <option value="null">Is completed?</option>
-            <option value="done">Completed</option>
-            <option value="not done">Not Coompleted</option>
-          </select>
-          <input type="text" />
-        </div>
-      </div>
-    </>
+      <select
+        value={done}
+        onChange={(e) => onDoneChange(e.target.value as Done)}
+        className="border rounded px-3 py-2"
+      >
+        <option value="all">All</option>
+        <option value="true">Completed</option>
+        <option value="false">Not completed</option>
+      </select>
+
+      <select
+        value={courseId ?? ""}
+        onChange={(e) => {
+          const v = e.target.value;
+          onCourseChange(v ? Number(v) : null);
+        }}
+        className="border rounded px-3 py-2"
+      >
+        <option value="">All courses</option>
+        {courses.map((c) => (
+          <option key={c.id} value={c.id}>
+            {c.title}
+          </option>
+        ))}
+      </select>
+      <Link to="/lessons/add">
+        <button className="btn">Add new lesson</button>
+      </Link>
+    </div>
   );
 }

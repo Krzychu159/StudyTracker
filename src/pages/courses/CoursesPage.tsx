@@ -17,7 +17,7 @@ export default function CoursesPage() {
   }, []);
 
   return (
-    <div className="p-4 w-full max-w-[500px]">
+    <div className="p-4 w-full max-w-[700px] space-y-4">
       <CoursesHeader />
       <CourseList courses={courses} />
     </div>
