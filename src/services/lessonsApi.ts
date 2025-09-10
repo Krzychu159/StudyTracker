@@ -58,3 +58,17 @@ export async function addLesson(title: string, courseId: number) {
   }
   return data || [];
 }
+
+export async function updateLesson(id: number, title: string) {
+  const { data, error } = await supabase
+    .from("lessons")
+    .update({ title })
+    .eq("id", id)
+    .select();
+
+  if (error) {
+    console.error("error updating lesson:", error.message);
+    throw error;
+  }
+  return data || [];
+}
