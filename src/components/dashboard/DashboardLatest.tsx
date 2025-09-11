@@ -27,13 +27,13 @@ export default function DashboardLatest({
 }: DashboardLatestProps) {
   return (
     <>
-      <div>
+      <div className="w-full max-w-[400px] mb-4">
         <p>Latest courses</p>
         {loading ? <div className="text-center">Loading...</div> : null}
         <CourseList courses={courses} slices={8} />
       </div>
 
-      <div>
+      <div className="w-full max-w-[400px] mb-4">
         <p>Latest lessons</p>
         {loading ? <div className="text-center">Loading...</div> : null}
         <LessonList lessons={lessons} slices={8} />

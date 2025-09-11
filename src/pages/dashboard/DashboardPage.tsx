@@ -34,7 +34,7 @@ export default function Dashboardpage() {
   }, []);
 
   return (
-    <div className="p-4 flex justify-center gap-8 w-full max-w-[500px]">
+    <div className="mx-auto w-full max-w-[700px] p-4 flex justify-center gap-6">
       <DashboardLatest courses={courses} lessons={lessons} loading={loading} />
     </div>
   );
