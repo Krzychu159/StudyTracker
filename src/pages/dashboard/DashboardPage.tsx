@@ -1,5 +1,5 @@
 import { getCourses } from "../../services/coursesApi";
-
+import Loader from "../../components/ui/Loader";
 import { useEffect, useState } from "react";
 import { getLessons } from "../../services/lessonsApi";
 import DashboardLatest from "../../components/dashboard/DashboardLatest";
@@ -32,6 +32,14 @@ export default function Dashboardpage() {
     getLessons().then(setLessons);
     setLoading(false);
   }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-[40vh] flex items-center justify-center">
+        <Loader size={40} />
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto w-full max-w-[700px] p-4 flex justify-center gap-6">

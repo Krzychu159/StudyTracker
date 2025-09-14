@@ -28,7 +28,7 @@ export default function LessonHeader({
         value={q}
         onChange={(e) => onQueryChange(e.target.value)}
         placeholder="Search lessons…"
-        className="border rounded px-3 py-2 flex-1 min-w-[220px]"
+        className="border rounded px-3 py-2 flex-1 min-w-[200px]"
       />
 
       <select
