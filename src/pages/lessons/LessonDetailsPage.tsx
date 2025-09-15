@@ -9,6 +9,7 @@ import { getCourseById } from "../../services/coursesApi";
 import toast from "react-hot-toast";
 import LessonDetailsData from "../../components/lessons/LessonDetailsData";
 import LessonButtons from "../../components/lessons/LessonButtons";
+import Loader from "../../components/ui/Loader";
 
 type Lessons = {
   id: number;
@@ -31,7 +32,6 @@ export default function LessonDetailsPage() {
   const [done, setDone] = useState<boolean | null>(null);
   const navigate = useNavigate();
 
-  // Fetch lesson
   useEffect(() => {
     if (!id) return;
 
@@ -95,8 +95,13 @@ export default function LessonDetailsPage() {
     }
   }
 
-  if (loading) return <div>Loading...</div>;
-
+  if (loading) {
+    return (
+      <div className="min-h-[40vh] flex items-center justify-center">
+        <Loader size={40} />
+      </div>
+    );
+  }
   return (
     <div className="p-4 w-full max-w-[500px]">
       <LessonDetailsData
