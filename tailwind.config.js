@@ -5,10 +5,10 @@ export default {
     extend: {
       colors: {
         primary: "#2563EB", // niebieski
-        secondary: "#F97316", // pomarańczowy
-        accent: "#10B981", // zielony
-        neutral: "#6B7280", // szary
-        background: "#F3F4F6", // jasne tło
+        secondary: "#EAB308", // złoty
+        accent: "#14B8A6", // turkus
+        neutral: "#475569", // szaro-niebieski
+        background: "#FFFFFF", // białe tło
       },
     },
   },
