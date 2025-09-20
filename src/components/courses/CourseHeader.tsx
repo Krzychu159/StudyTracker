@@ -13,7 +13,7 @@ export default function CoursesHeader() {
         <input
           type="text"
           className="border rounded px-3 py-2 flex-1 min-w-[280px]"
-          placeholder="Search lessons…"
+          placeholder="Search courses..."
         />
         <div className="flex flex-col ">
           <label htmlFor="min">Set min progress</label>
