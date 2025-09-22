@@ -12,13 +12,13 @@ type LessonListProps = {
 
 export default function CourseList({ lessons }: LessonListProps) {
   return (
-    <>
-      <h2 className="text-lg font-semibold mb-2">Lessons in this course:</h2>
+    <div className="">
+      <h2 className="text-xs font-semibold mb-2 ">Lessons in this course:</h2>
       <ul className="space-y-2 ">
         {lessons.map((lesson) => (
           <li
             key={lesson.id}
-            className="p-2 border rounded bg-white shadow flex flex-row justify-between items-center max-w-md"
+            className="p-2 border rounded bg-white shadow flex flex-row justify-between items-center "
           >
             <div>
               {" "}
@@ -37,6 +37,6 @@ export default function CourseList({ lessons }: LessonListProps) {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 }

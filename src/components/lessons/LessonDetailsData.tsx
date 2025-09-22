@@ -39,7 +39,7 @@ export default function LessonDetailsData({
       <Link to={`/courses/${lesson?.course_id}`}>
         {" "}
         <div className="p-4 text-secondary">
-          This lesson is from course: {course?.title}
+          This lesson is from course {course?.title}
         </div>
       </Link>
     </div>

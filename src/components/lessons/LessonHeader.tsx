@@ -25,11 +25,11 @@ export default function LessonHeader({
   return (
     <div className="flex flex-wrap gap-2 items-center">
       <div className="flex-1 flex justify-between items-center min-w-[200px]">
-        <div>Lessons</div>
+        <div className="font-semibold">Lessons</div>
         <div>
           {" "}
           <Link to="/lessons/add">
-            <span>+Add</span>
+            <div className="text-blue-600 hover:underline">+Add</div>
           </Link>
         </div>
       </div>

@@ -10,7 +10,7 @@ export default function LessonButtons({
   lessonId,
 }: LessonButtonsProps) {
   return (
-    <div className="p-4 flex justify-around">
+    <div className="p-4 flex justify-around flex-wrap gap-4">
       <button className="btn" onClick={handleDelete}>
         Delete lesson
       </button>

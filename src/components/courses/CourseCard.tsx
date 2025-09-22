@@ -7,8 +7,8 @@ type CourseCardProps = {
 };
 
 export default function CourseCard({ id, title, progress }: CourseCardProps) {
-  const hue = (progress / 100) * 120; // 0 = red, 120 = green
-  const lightness = 40 + (progress / 100) * 20; // 40% przy 0, 60% przy 100
+  const hue = (progress / 100) * 120;
+  const lightness = 40 + (progress / 100) * 20; //
   return (
     <li className="p-2 border rounded bg-white shadow h-20">
       <Link to={`/courses/${id}`}>

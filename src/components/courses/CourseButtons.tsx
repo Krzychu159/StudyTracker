@@ -10,7 +10,7 @@ export default function CourseButtons({
   handleDelete,
 }: CourseButtonsProps) {
   return (
-    <div className="p-4 flex justify-around">
+    <div className="py-4 flex justify-between flex-wrap gap-4">
       <button className="btn" onClick={handleDelete}>
         Delete Course
       </button>
