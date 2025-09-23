@@ -78,13 +78,17 @@ export default function CourseEditForm() {
 
   return (
     <div>
-      <form className="flex flex-col gap-4 max-w-md" onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col  max-w-md p-4 w-full max-w-[700px] space-y-4"
+        onSubmit={handleSubmit}
+      >
         <label htmlFor="title">Change title</label>
         <input
           id="title"
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          className="border rounded px-3 py-2 min-w-[280px]"
         />
 
         <label htmlFor="description">Change description</label>
@@ -93,6 +97,7 @@ export default function CourseEditForm() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={5}
+          className="border rounded px-3 py-2 min-w-[280px]"
         />
 
         <button className={`btn ${isInvalid ? "btn-off" : ""}`} type="submit">

@@ -24,7 +24,7 @@ export default function CourseAddForm() {
 
   return (
     <>
-      <h2>Add new course</h2>
+      <h1 className="text-xl ">Add new course</h1>
       <label htmlFor="title">Course title</label>
       <input
         type="text"
@@ -32,6 +32,7 @@ export default function CourseAddForm() {
         id="title"
         onChange={(e) => setTitle(e.target.value)}
         value={title}
+        className="border rounded px-3 py-2 min-w-[280px]"
       />
       <label htmlFor="desciption">Course description</label>
       <input
@@ -40,6 +41,7 @@ export default function CourseAddForm() {
         id="description"
         onChange={(e) => setDescription(e.target.value)}
         value={description}
+        className="border rounded px-3 py-2 min-w-[280px]"
       />
       <button className="btn" onClick={() => handleAddCourse()}>
         Add Course

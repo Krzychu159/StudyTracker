@@ -21,8 +21,8 @@ export default function LessonAddForm() {
   }, []);
 
   const handleAddLesson = () => {
-    if (courseId === 0) {
-      toast.error("Please select a course");
+    if (courseId === 0 || title.trim() === "") {
+      toast.error("Please select a course and enter a title");
       return;
     }
     addLesson(title, courseId)
@@ -39,12 +39,14 @@ export default function LessonAddForm() {
   };
   return (
     <>
+      <h1 className="text-xl">Add new lesson</h1>
       <label htmlFor="courses">Choose course</label>
       <select
         name="courses"
         id="courses"
         onChange={(e) => setCourseId(Number(e.target.value))}
         value={courseId}
+        className="border rounded px-3 py-2 min-w-[280px]"
       >
         <option value="0">None</option>
         {courses.map((course) => (
@@ -59,6 +61,7 @@ export default function LessonAddForm() {
         id="title"
         onChange={(e) => setTitle(e.target.value)}
         value={title}
+        className="border rounded px-3 py-2 min-w-[280px]"
       />
       <button className="btn" onClick={() => handleAddLesson()}>
         Add new lesson

@@ -72,6 +72,7 @@ export default function LessonEditForm() {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          className="border rounded px-3 py-2 min-w-[280px]"
         />
         <button className={`btn ${isInvalid ? "btn-off" : ""}`} type="submit">
           Save
